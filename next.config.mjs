@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    images: {
+        domains: ['bootdey.com'],
+      },
     webpack: (config, { isServer }) => {
       if (!isServer) {
         config.resolve.alias['bootstrap/dist/css/bootstrap.min.css.map'] = false;

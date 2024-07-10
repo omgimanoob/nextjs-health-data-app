@@ -1,75 +1,70 @@
-export async function fetchUserList() {
-  const res = await fetch(
-    "https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserList"
+import fs from 'fs/promises';
+import path from 'path';
+import { User, UserSleepMarker, UserAnalysis } from '../lib/definitions';
+
+// Type guard for User
+function isValidUser(obj: any): obj is User {
+  return (
+    typeof obj === 'object' &&
+    typeof obj.UserName === 'string' &&
+    (typeof obj.UserID === 'string' || obj.UserID === undefined) &&
+    typeof obj.DeviceCompany === 'string'
   );
-  return res.json();
 }
 
-//   [
-//     {
-//     "UserName": "Lew hon Kean",
-//     "UserID": "E2:90:00:00:07:22",
-//     "DeviceCompany": "SBRing"
-//     },
-//     {
-//     "UserName": "Ming Teck Lim",
-//     "UserID": "121166543",
-//     "DeviceCompany": "JCRing"
-//     }
-//     ]
+// Type guard for UserSleepMarker
+function isValidUserSleepMarker(obj: any): obj is UserSleepMarker {
+  return (
+    typeof obj === 'object' &&
+    typeof obj.HRVDate === 'string' &&
+    typeof obj.SleepOnset === 'string' &&
+    typeof obj.WakeUpTime === 'string' &&
+    typeof obj.Awake === 'string' &&
+    typeof obj.Light === 'string' &&
+    typeof obj.Deep === 'string' &&
+    typeof obj.UserID === 'string'
+  );
+}
+
+// Type guard for UserAnalysis
+function isValidUserAnalysis(obj: any): obj is UserAnalysis {
+  return (
+    typeof obj === 'object' &&
+    typeof obj.HRVDate === 'string' &&
+    typeof obj.VitalzScore === 'string' &&
+    typeof obj.ScoreType === 'string' &&
+    typeof obj.StressorIndex === 'string'
+  );
+}
+
+async function fetchWithFallback(url: string, fallbackFilePath: string, isValid: (obj: any) => boolean) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('API call failed');
+    const data = await res.json();
+    return data.filter(isValid); // Filter invalid data
+  } catch (error) {
+    console.error(`API call failed, reading from local file: ${fallbackFilePath}`, error);
+    const data = await fs.readFile(path.resolve(fallbackFilePath), 'utf-8');
+    const parsedData = JSON.parse(data);
+    return parsedData.filter(isValid); // Filter invalid data
+  }
+}
+
+export async function fetchUserList() {
+  const url = "https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserList";
+  const fallbackFilePath = './data/getUserList.json';
+  return fetchWithFallback(url, fallbackFilePath, isValidUser);
+}
 
 export async function fetchUserAnalysis(userID: string) {
-  const res = await fetch(
-    `https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserAnalysis?userID=${userID}`
-  );
-  return res.json();
+  const url = `https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserAnalysis?userID=${userID}`;
+  const fallbackFilePath = `./data/getUserAnalysis-${encodeURIComponent(userID)}.json`;
+  return fetchWithFallback(url, fallbackFilePath, isValidUserAnalysis);
 }
-
-//   [
-//     {
-//     "HRVDate": "2024-06-20",
-//     "VitalzScore": "56.75675675675675675700",
-//     "ScoreType": "MildStress",
-//     "StressorIndex": "40"
-//     },
-//     {
-//     "HRVDate": "2024-06-19",
-//     "VitalzScore": "45.94594594594594594600",
-//     "ScoreType": "MildStress",
-//     "StressorIndex": "18"
-//     },
-//     {
-//     "HRVDate": "2024-06-18",
-//     "VitalzScore": "56.75675675675675675700",
-//     "ScoreType": "MildStress",
-//     "StressorIndex": "59"
-//     },
-// ...
-//]
 
 export async function fetchUserSleepData(userID: string) {
-  const res = await fetch(
-    `https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserSleepMarker?userID=${userID}`
-  );
-  return res.json();
+  const url = `https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserSleepMarker?userID=${userID}`;
+  const fallbackFilePath = `./data/getUserSleepMarker-${encodeURIComponent(userID)}.json`;
+  return fetchWithFallback(url, fallbackFilePath, isValidUserSleepMarker);
 }
-
-//   [
-//     {
-//     "HRVDate": "2024-05-05",
-//     "SleepOnset": "2024-05-04T16:36:01.000Z",
-//     "WakeUpTime": "2024-05-04T23:26:04.000Z",
-//     "Awake": "20",
-//     "Light": "52",
-//     "Deep": "27"
-//     },
-//     {
-//     "HRVDate": "2024-05-18",
-//     "SleepOnset": "2024-05-17T15:59:01.000Z",
-//     "WakeUpTime": "2024-05-17T22:57:59.000Z",
-//     "Awake": "20",
-//     "Light": "53",
-//     "Deep": "26"
-//     },
-//     ...
-//   ]
