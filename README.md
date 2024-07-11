@@ -1,4 +1,4 @@
-![Screenshot (/public/Screenshot 2024-07-11 145415.jpg)]
+![Screenshot](/public/Screenshot 2024-07-11 145415.jpg)
 
 Healthcare App to show user's Sleep pattern and health analysis.
 
