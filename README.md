@@ -4,6 +4,7 @@ Healthcare App to show user's Sleep pattern and health analysis.
 ## Notes
 
 Records which Awake, Light and Deep aren't numbers, such as NaN is removed. Example: https://exam-vitalz-backend-8267f8929b82.herokuapp.com/api/getUserSleepMarker?userID=E2%3A90%3A00%3A00%3A07%3A22
+```
 {
     "HRVDate": "2024-04-30",
     "SleepOnset": "2024-04-29T16:16:00.000Z",
@@ -12,7 +13,7 @@ Records which Awake, Light and Deep aren't numbers, such as NaN is removed. Exam
     "Light": "NaN",
     "Deep": "NaN"
 },
-
+```
 ## To-dos
 
 - Date range selectors.
