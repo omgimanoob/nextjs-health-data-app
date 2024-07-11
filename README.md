@@ -1,4 +1,4 @@
-![Screenshot](/public/screenshot.jpg)
+![Screenshot](/public/localhost_3000_user_121166543(iPhone SE).png)
 
 Healthcare App to show user's Sleep pattern and health analysis.
 
