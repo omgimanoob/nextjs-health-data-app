@@ -1,3 +1,5 @@
+![Screenshot (Screenshot 2024-07-11 145415.jpg)]
+
 Healthcare App to show user's Sleep pattern and health analysis.
 
 
@@ -31,6 +33,16 @@ Records which Awake, Light and Deep aren't numbers, such as NaN is removed. Exam
 
 
 ## Getting Started
+
+Clone this repo:
+```bash
+gh repo clone omgimanoob/nextjs-health-data-app
+```
+
+Change to Directory:
+```bash
+cd nextjs-health-data-app
+```
 
 Install Dependencies:
 
