@@ -29,9 +29,6 @@ Healthcare App to show user's Sleep pattern and health analysis.
 
 - Node.js version >= v18.17.0 is required.
 
-
-
-
 ## Getting Started
 
 Clone this repo:
