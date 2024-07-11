@@ -33,7 +33,7 @@ Healthcare App to show user's Sleep pattern and health analysis.
 
 Clone this repo:
 ```bash
-gh repo clone omgimanoob/nextjs-health-data-app
+gh git clone https://github.com/omgimanoob/nextjs-health-data-app.git
 ```
 
 Change to Directory:
