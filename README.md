@@ -1,7 +1,6 @@
-![Screenshot](/public/screenshot.png)
-
 Healthcare App to show user's Sleep pattern and health analysis.
 
+![Screenshot](/public/screenshot.png)
 
 ## Notes
 
