@@ -11,12 +11,18 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
+    "bootstrap-table": "^1.23.0",
+    "chart.js": "^4.4.3",
+    "core-js": "^3.37.1",
+    "jquery": "^3.7.1",
     "next": "^14.2.4",
     "react": "^18",
     "react-bootstrap": "^2.10.4",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.30",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

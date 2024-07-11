@@ -1,26 +1,17 @@
-//  components\SearchNavbar.tsx
-"use client";
-import React from "react";
+// components\SearchNavbar.tsx
+import React from 'react';
+import { User } from '@/lib/definitions';
 import SearchableDatalist from "../components/SearchableDatalist";
 
-interface User {
-  UserName: string;
-  UserID: string;
-  DeviceCompany: string;
-}
-
-interface SearchableDatalistProps {
+interface SearchNavbarProps {
   users: User[];
   placeholder: string;
 }
 
-const SearchNavbar: React.FC<SearchableDatalistProps> = ({
-  users,
-  placeholder,
-}) => {
+const SearchNavbar: React.FC<SearchNavbarProps> = ({ users, placeholder }) => {
   return (
     <nav className="navbar navbar-light bg-light justify-content-between fixed-top">
-      <div className="container-fluid">
+      <div className="container">
         <a className="navbar-brand">Navbar</a>
         <SearchableDatalist users={users} placeholder={placeholder} />
       </div>

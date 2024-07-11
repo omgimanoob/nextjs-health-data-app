@@ -1,7 +1,7 @@
 // lib\definitions.ts
 export interface User {
   UserName: string;
-  UserID?: string;
+  UserID: string;
   DeviceCompany: string;
 }
 
@@ -12,7 +12,6 @@ export interface UserSleepMarker {
   Awake: string;
   Light: string;
   Deep: string;
-  UserID: string;
 }
 
 export interface UserAnalysis {
