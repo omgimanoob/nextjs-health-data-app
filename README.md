@@ -1,6 +1,6 @@
 Healthcare App to show user's Sleep pattern and health analysis.
 
-![Screenshot](/public/screenshot.png)
+![Screenshot](/public/screenshot.jpg)
 
 ## Notes
 
